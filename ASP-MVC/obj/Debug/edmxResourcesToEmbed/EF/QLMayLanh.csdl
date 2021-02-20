@@ -1,0 +1,649 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLMayLanhModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="QLMayLanhEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="Acc_Login" ReturnType="Collection(Boolean)">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="BienBanNghiemThus" EntityType="QLMayLanhModel.BienBanNghiemThu" />
+    <EntitySet Name="ChiPhiKhacs" EntityType="QLMayLanhModel.ChiPhiKhac" />
+    <EntitySet Name="CTBBNT_MayLanh" EntityType="QLMayLanhModel.CTBBNT_MayLanh" />
+    <EntitySet Name="CTBienBanNghiemThus" EntityType="QLMayLanhModel.CTBienBanNghiemThu" />
+    <EntitySet Name="CTPhieuNhapVatTus" EntityType="QLMayLanhModel.CTPhieuNhapVatTu" />
+    <EntitySet Name="CTPhieuXuatKhoes" EntityType="QLMayLanhModel.CTPhieuXuatKho" />
+    <EntitySet Name="CTPhieuXuatVatTu_Khach" EntityType="QLMayLanhModel.CTPhieuXuatVatTu_Khach" />
+    <EntitySet Name="CTPhieuXuatVatTu_KTV" EntityType="QLMayLanhModel.CTPhieuXuatVatTu_KTV" />
+    <EntitySet Name="DichVu_SanPham" EntityType="QLMayLanhModel.DichVu_SanPham" />
+    <EntitySet Name="KhachHangs" EntityType="QLMayLanhModel.KhachHang" />
+    <EntitySet Name="KhoVatDungs" EntityType="QLMayLanhModel.KhoVatDung" />
+    <EntitySet Name="KTV_BBNT" EntityType="QLMayLanhModel.KTV_BBNT" />
+    <EntitySet Name="MayLanhs" EntityType="QLMayLanhModel.MayLanh" />
+    <EntitySet Name="NhanViens" EntityType="QLMayLanhModel.NhanVien" />
+    <EntitySet Name="PhieuNhapVatTus" EntityType="QLMayLanhModel.PhieuNhapVatTu" />
+    <EntitySet Name="PhieuXuatKhoes" EntityType="QLMayLanhModel.PhieuXuatKho" />
+    <EntitySet Name="PhieuXuatVatTu_Khach" EntityType="QLMayLanhModel.PhieuXuatVatTu_Khach" />
+    <EntitySet Name="PhieuXuatVatTu_KTV" EntityType="QLMayLanhModel.PhieuXuatVatTu_KTV" />
+    <EntitySet Name="VatTus" EntityType="QLMayLanhModel.VatTu" />
+    <EntitySet Name="YeuCauPhucVus" EntityType="QLMayLanhModel.YeuCauPhucVu" />
+    <AssociationSet Name="FK__BienBanNgh__IDYC__1FCDBCEB" Association="QLMayLanhModel.FK__BienBanNgh__IDYC__1FCDBCEB">
+      <End Role="YeuCauPhucVu" EntitySet="YeuCauPhucVus" />
+      <End Role="BienBanNghiemThu" EntitySet="BienBanNghiemThus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTBienBan__IDBBN__2C3393D0" Association="QLMayLanhModel.FK__CTBienBan__IDBBN__2C3393D0">
+      <End Role="BienBanNghiemThu" EntitySet="BienBanNghiemThus" />
+      <End Role="CTBienBanNghiemThu" EntitySet="CTBienBanNghiemThus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KTV_BBNT__IDBBNT__24927208" Association="QLMayLanhModel.FK__KTV_BBNT__IDBBNT__24927208">
+      <End Role="BienBanNghiemThu" EntitySet="BienBanNghiemThus" />
+      <End Role="KTV_BBNT" EntitySet="KTV_BBNT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiPhiKha__IDYCP__286302EC" Association="QLMayLanhModel.FK__ChiPhiKha__IDYCP__286302EC">
+      <End Role="YeuCauPhucVu" EntitySet="YeuCauPhucVus" />
+      <End Role="ChiPhiKhac" EntitySet="ChiPhiKhacs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTBBNT_Ma__IDCTB__300424B4" Association="QLMayLanhModel.FK__CTBBNT_Ma__IDCTB__300424B4">
+      <End Role="CTBienBanNghiemThu" EntitySet="CTBienBanNghiemThus" />
+      <End Role="CTBBNT_MayLanh" EntitySet="CTBBNT_MayLanh" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTBBNT_Ma__IDMay__30F848ED" Association="QLMayLanhModel.FK__CTBBNT_Ma__IDMay__30F848ED">
+      <End Role="MayLanh" EntitySet="MayLanhs" />
+      <End Role="CTBBNT_MayLanh" EntitySet="CTBBNT_MayLanh" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTBienBan__IDDic__2D27B809" Association="QLMayLanhModel.FK__CTBienBan__IDDic__2D27B809">
+      <End Role="DichVu_SanPham" EntitySet="DichVu_SanPham" />
+      <End Role="CTBienBanNghiemThu" EntitySet="CTBienBanNghiemThus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuNh__IDPhi__440B1D61" Association="QLMayLanhModel.FK__CTPhieuNh__IDPhi__440B1D61">
+      <End Role="PhieuNhapVatTu" EntitySet="PhieuNhapVatTus" />
+      <End Role="CTPhieuNhapVatTu" EntitySet="CTPhieuNhapVatTus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuNh__IDVat__44FF419A" Association="QLMayLanhModel.FK__CTPhieuNh__IDVat__44FF419A">
+      <End Role="VatTu" EntitySet="VatTus" />
+      <End Role="CTPhieuNhapVatTu" EntitySet="CTPhieuNhapVatTus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuXu__IDPhi__38996AB5" Association="QLMayLanhModel.FK__CTPhieuXu__IDPhi__38996AB5">
+      <End Role="PhieuXuatKho" EntitySet="PhieuXuatKhoes" />
+      <End Role="CTPhieuXuatKho" EntitySet="CTPhieuXuatKhoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuXu__IDVat__398D8EEE" Association="QLMayLanhModel.FK__CTPhieuXu__IDVat__398D8EEE">
+      <End Role="KhoVatDung" EntitySet="KhoVatDungs" />
+      <End Role="CTPhieuXuatKho" EntitySet="CTPhieuXuatKhoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuXu__IDPX___571DF1D5" Association="QLMayLanhModel.FK__CTPhieuXu__IDPX___571DF1D5">
+      <End Role="PhieuXuatVatTu_Khach" EntitySet="PhieuXuatVatTu_Khach" />
+      <End Role="CTPhieuXuatVatTu_Khach" EntitySet="CTPhieuXuatVatTu_Khach" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuXu__IDVat__5812160E" Association="QLMayLanhModel.FK__CTPhieuXu__IDVat__5812160E">
+      <End Role="VatTu" EntitySet="VatTus" />
+      <End Role="CTPhieuXuatVatTu_Khach" EntitySet="CTPhieuXuatVatTu_Khach" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuXu__IDPX___4F7CD00D" Association="QLMayLanhModel.FK__CTPhieuXu__IDPX___4F7CD00D">
+      <End Role="PhieuXuatVatTu_KTV" EntitySet="PhieuXuatVatTu_KTV" />
+      <End Role="CTPhieuXuatVatTu_KTV" EntitySet="CTPhieuXuatVatTu_KTV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTPhieuXu__IDVat__5070F446" Association="QLMayLanhModel.FK__CTPhieuXu__IDVat__5070F446">
+      <End Role="VatTu" EntitySet="VatTus" />
+      <End Role="CTPhieuXuatVatTu_KTV" EntitySet="CTPhieuXuatVatTu_KTV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MayLanh__IDKhach__145C0A3F" Association="QLMayLanhModel.FK__MayLanh__IDKhach__145C0A3F">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="MayLanh" EntitySet="MayLanhs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__YeuCauPhu__IDKha__1B0907CE" Association="QLMayLanhModel.FK__YeuCauPhu__IDKha__1B0907CE">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="YeuCauPhucVu" EntitySet="YeuCauPhucVus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KTV_BBNT__IDUser__239E4DCF" Association="QLMayLanhModel.FK__KTV_BBNT__IDUser__239E4DCF">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="KTV_BBNT" EntitySet="KTV_BBNT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PhieuXuat__IDKTV__35BCFE0A" Association="QLMayLanhModel.FK__PhieuXuat__IDKTV__35BCFE0A">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="PhieuXuatKho" EntitySet="PhieuXuatKhoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PhieuXuat__IDKTV__47DBAE45" Association="QLMayLanhModel.FK__PhieuXuat__IDKTV__47DBAE45">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="PhieuXuatVatTu_KTV" EntitySet="PhieuXuatVatTu_KTV" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PhieuXuat__IDYeu__48CFD27E" Association="QLMayLanhModel.FK__PhieuXuat__IDYeu__48CFD27E">
+      <End Role="YeuCauPhucVu" EntitySet="YeuCauPhucVus" />
+      <End Role="PhieuXuatVatTu_KTV" EntitySet="PhieuXuatVatTu_KTV" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BienBanNghiemThu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDYC" Type="Int32" Nullable="false" />
+    <Property Name="Ma" Type="Int64" />
+    <Property Name="NgayLap" Type="DateTime" Precision="0" />
+    <Property Name="DoanhThu" Type="Double" />
+    <Property Name="Diem" Type="Double" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="YeuCauPhucVu" Relationship="QLMayLanhModel.FK__BienBanNgh__IDYC__1FCDBCEB" FromRole="BienBanNghiemThu" ToRole="YeuCauPhucVu" />
+    <NavigationProperty Name="CTBienBanNghiemThus" Relationship="QLMayLanhModel.FK__CTBienBan__IDBBN__2C3393D0" FromRole="BienBanNghiemThu" ToRole="CTBienBanNghiemThu" />
+    <NavigationProperty Name="KTV_BBNT" Relationship="QLMayLanhModel.FK__KTV_BBNT__IDBBNT__24927208" FromRole="BienBanNghiemThu" ToRole="KTV_BBNT" />
+  </EntityType>
+  <EntityType Name="ChiPhiKhac">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDYCPV" Type="Int32" Nullable="false" />
+    <Property Name="TenChiPhi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="YeuCauPhucVu" Relationship="QLMayLanhModel.FK__ChiPhiKha__IDYCP__286302EC" FromRole="ChiPhiKhac" ToRole="YeuCauPhucVu" />
+  </EntityType>
+  <EntityType Name="CTBBNT_MayLanh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCTBBNT" Type="Int32" Nullable="false" />
+    <Property Name="IDMay" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="CTBienBanNghiemThu" Relationship="QLMayLanhModel.FK__CTBBNT_Ma__IDCTB__300424B4" FromRole="CTBBNT_MayLanh" ToRole="CTBienBanNghiemThu" />
+    <NavigationProperty Name="MayLanh" Relationship="QLMayLanhModel.FK__CTBBNT_Ma__IDMay__30F848ED" FromRole="CTBBNT_MayLanh" ToRole="MayLanh" />
+  </EntityType>
+  <EntityType Name="CTBienBanNghiemThu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDBBNT" Type="Int32" Nullable="false" />
+    <Property Name="IDDichVu" Type="Int32" Nullable="false" />
+    <Property Name="DonGia" Type="Int32" />
+    <Property Name="Diem" Type="Double" />
+    <Property Name="MayLanh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="CPDauVao" Type="Int64" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BienBanNghiemThu" Relationship="QLMayLanhModel.FK__CTBienBan__IDBBN__2C3393D0" FromRole="CTBienBanNghiemThu" ToRole="BienBanNghiemThu" />
+    <NavigationProperty Name="CTBBNT_MayLanh" Relationship="QLMayLanhModel.FK__CTBBNT_Ma__IDCTB__300424B4" FromRole="CTBienBanNghiemThu" ToRole="CTBBNT_MayLanh" />
+    <NavigationProperty Name="DichVu_SanPham" Relationship="QLMayLanhModel.FK__CTBienBan__IDDic__2D27B809" FromRole="CTBienBanNghiemThu" ToRole="DichVu_SanPham" />
+  </EntityType>
+  <EntityType Name="CTPhieuNhapVatTu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPhieuNhap" Type="Int32" Nullable="false" />
+    <Property Name="IDVatTu" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="NCC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="PhieuNhapVatTu" Relationship="QLMayLanhModel.FK__CTPhieuNh__IDPhi__440B1D61" FromRole="CTPhieuNhapVatTu" ToRole="PhieuNhapVatTu" />
+    <NavigationProperty Name="VatTu" Relationship="QLMayLanhModel.FK__CTPhieuNh__IDVat__44FF419A" FromRole="CTPhieuNhapVatTu" ToRole="VatTu" />
+  </EntityType>
+  <EntityType Name="CTPhieuXuatKho">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPhieuXuat" Type="Int32" Nullable="false" />
+    <Property Name="IDVatDung" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="PhieuXuatKho" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDPhi__38996AB5" FromRole="CTPhieuXuatKho" ToRole="PhieuXuatKho" />
+    <NavigationProperty Name="KhoVatDung" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDVat__398D8EEE" FromRole="CTPhieuXuatKho" ToRole="KhoVatDung" />
+  </EntityType>
+  <EntityType Name="CTPhieuXuatVatTu_Khach">
+    <Key>
+      <PropertyRef Name="IDPX_Khach" />
+      <PropertyRef Name="IDVatTu" />
+    </Key>
+    <Property Name="IDPX_Khach" Type="Int32" Nullable="false" />
+    <Property Name="IDVatTu" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="PhieuXuatVatTu_Khach" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDPX___571DF1D5" FromRole="CTPhieuXuatVatTu_Khach" ToRole="PhieuXuatVatTu_Khach" />
+    <NavigationProperty Name="VatTu" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDVat__5812160E" FromRole="CTPhieuXuatVatTu_Khach" ToRole="VatTu" />
+  </EntityType>
+  <EntityType Name="CTPhieuXuatVatTu_KTV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPX_KTV" Type="Int32" Nullable="false" />
+    <Property Name="IDVatTu" Type="Int32" Nullable="false" />
+    <Property Name="SLLay" Type="Double" />
+    <Property Name="SLTra" Type="Double" />
+    <Property Name="SLThucTe" Type="Double" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="PhieuXuatVatTu_KTV" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDPX___4F7CD00D" FromRole="CTPhieuXuatVatTu_KTV" ToRole="PhieuXuatVatTu_KTV" />
+    <NavigationProperty Name="VatTu" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDVat__5070F446" FromRole="CTPhieuXuatVatTu_KTV" ToRole="VatTu" />
+  </EntityType>
+  <EntityType Name="DichVu_SanPham">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaDV_SP" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenDichVu_SanPham" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Loai" Type="Boolean" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="Diem" Type="Double" />
+    <Property Name="NgayApDung" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="CTBienBanNghiemThus" Relationship="QLMayLanhModel.FK__CTBienBan__IDDic__2D27B809" FromRole="DichVu_SanPham" ToRole="CTBienBanNghiemThu" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayPhucVu" Type="DateTime" Precision="0" />
+    <Property Name="Loai" Type="Boolean" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="MayLanhs" Relationship="QLMayLanhModel.FK__MayLanh__IDKhach__145C0A3F" FromRole="KhachHang" ToRole="MayLanh" />
+    <NavigationProperty Name="YeuCauPhucVus" Relationship="QLMayLanhModel.FK__YeuCauPhu__IDKha__1B0907CE" FromRole="KhachHang" ToRole="YeuCauPhucVu" />
+  </EntityType>
+  <EntityType Name="KhoVatDung">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenVatDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayMua" Type="DateTime" Precision="0" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTPhieuXuatKhoes" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDVat__398D8EEE" FromRole="KhoVatDung" ToRole="CTPhieuXuatKho" />
+  </EntityType>
+  <EntityType Name="KTV_BBNT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDBBNT" Type="Int32" Nullable="false" />
+    <Property Name="IDUser" Type="Int32" Nullable="false" />
+    <Property Name="Diem" Type="Double" />
+    <Property Name="DanhGia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="BienBanNghiemThu" Relationship="QLMayLanhModel.FK__KTV_BBNT__IDBBNT__24927208" FromRole="KTV_BBNT" ToRole="BienBanNghiemThu" />
+    <NavigationProperty Name="NhanVien" Relationship="QLMayLanhModel.FK__KTV_BBNT__IDUser__239E4DCF" FromRole="KTV_BBNT" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="MayLanh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDKhachHang" Type="Int32" Nullable="false" />
+    <Property Name="IDDichVu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ma" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TenMay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CongSuat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayMua" Type="DateTime" Precision="0" />
+    <Property Name="ViTri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTBBNT_MayLanh" Relationship="QLMayLanhModel.FK__CTBBNT_Ma__IDMay__30F848ED" FromRole="MayLanh" ToRole="CTBBNT_MayLanh" />
+    <NavigationProperty Name="KhachHang" Relationship="QLMayLanhModel.FK__MayLanh__IDKhach__145C0A3F" FromRole="MayLanh" ToRole="KhachHang" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TenKTV" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Loai" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="KTV_BBNT" Relationship="QLMayLanhModel.FK__KTV_BBNT__IDUser__239E4DCF" FromRole="NhanVien" ToRole="KTV_BBNT" />
+    <NavigationProperty Name="PhieuXuatKhoes" Relationship="QLMayLanhModel.FK__PhieuXuat__IDKTV__35BCFE0A" FromRole="NhanVien" ToRole="PhieuXuatKho" />
+    <NavigationProperty Name="PhieuXuatVatTu_KTV" Relationship="QLMayLanhModel.FK__PhieuXuat__IDKTV__47DBAE45" FromRole="NhanVien" ToRole="PhieuXuatVatTu_KTV" />
+  </EntityType>
+  <EntityType Name="PhieuNhapVatTu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayNhap" Type="DateTime" Precision="0" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTPhieuNhapVatTus" Relationship="QLMayLanhModel.FK__CTPhieuNh__IDPhi__440B1D61" FromRole="PhieuNhapVatTu" ToRole="CTPhieuNhapVatTu" />
+  </EntityType>
+  <EntityType Name="PhieuXuatKho">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDKTV" Type="Int32" Nullable="false" />
+    <Property Name="NgayXuat" Type="DateTime" Precision="3" />
+    <Property Name="NgayTra" Type="DateTime" Precision="3" />
+    <Property Name="KiemDuyet" Type="Boolean" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTPhieuXuatKhoes" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDPhi__38996AB5" FromRole="PhieuXuatKho" ToRole="CTPhieuXuatKho" />
+    <NavigationProperty Name="NhanVien" Relationship="QLMayLanhModel.FK__PhieuXuat__IDKTV__35BCFE0A" FromRole="PhieuXuatKho" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="PhieuXuatVatTu_Khach">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayXuat" Type="DateTime" Precision="0" />
+    <Property Name="TenKhach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KiemDuyet" Type="Boolean" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTPhieuXuatVatTu_Khach" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDPX___571DF1D5" FromRole="PhieuXuatVatTu_Khach" ToRole="CTPhieuXuatVatTu_Khach" />
+  </EntityType>
+  <EntityType Name="PhieuXuatVatTu_KTV">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayXuat" Type="DateTime" Precision="0" />
+    <Property Name="IDKTV" Type="Int32" Nullable="false" />
+    <Property Name="IDYeuCauPV" Type="Int32" Nullable="false" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KiemDuyet" Type="Boolean" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTPhieuXuatVatTu_KTV" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDPX___4F7CD00D" FromRole="PhieuXuatVatTu_KTV" ToRole="CTPhieuXuatVatTu_KTV" />
+    <NavigationProperty Name="NhanVien" Relationship="QLMayLanhModel.FK__PhieuXuat__IDKTV__47DBAE45" FromRole="PhieuXuatVatTu_KTV" ToRole="NhanVien" />
+    <NavigationProperty Name="YeuCauPhucVu" Relationship="QLMayLanhModel.FK__PhieuXuat__IDYeu__48CFD27E" FromRole="PhieuXuatVatTu_KTV" ToRole="YeuCauPhucVu" />
+  </EntityType>
+  <EntityType Name="VatTu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenVatTu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="DonVi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GiaBan" Type="Double" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="CTPhieuNhapVatTus" Relationship="QLMayLanhModel.FK__CTPhieuNh__IDVat__44FF419A" FromRole="VatTu" ToRole="CTPhieuNhapVatTu" />
+    <NavigationProperty Name="CTPhieuXuatVatTu_Khach" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDVat__5812160E" FromRole="VatTu" ToRole="CTPhieuXuatVatTu_Khach" />
+    <NavigationProperty Name="CTPhieuXuatVatTu_KTV" Relationship="QLMayLanhModel.FK__CTPhieuXu__IDVat__5070F446" FromRole="VatTu" ToRole="CTPhieuXuatVatTu_KTV" />
+  </EntityType>
+  <EntityType Name="YeuCauPhucVu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDKhachHang" Type="Int32" Nullable="false" />
+    <Property Name="DiaChiPhucVu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Loai" Type="Int32" />
+    <Property Name="YeuCau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayLap" Type="DateTime" Precision="0" />
+    <Property Name="NgayBatDau" Type="DateTime" Precision="0" />
+    <Property Name="NgayLamTiep" Type="DateTime" Precision="0" />
+    <Property Name="NgayDuKienTra" Type="DateTime" Precision="0" />
+    <Property Name="NgayHoanThanh" Type="DateTime" Precision="0" />
+    <Property Name="LiDo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SoNgay" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="BienBanNghiemThus" Relationship="QLMayLanhModel.FK__BienBanNgh__IDYC__1FCDBCEB" FromRole="YeuCauPhucVu" ToRole="BienBanNghiemThu" />
+    <NavigationProperty Name="ChiPhiKhacs" Relationship="QLMayLanhModel.FK__ChiPhiKha__IDYCP__286302EC" FromRole="YeuCauPhucVu" ToRole="ChiPhiKhac" />
+    <NavigationProperty Name="KhachHang" Relationship="QLMayLanhModel.FK__YeuCauPhu__IDKha__1B0907CE" FromRole="YeuCauPhucVu" ToRole="KhachHang" />
+    <NavigationProperty Name="PhieuXuatVatTu_KTV" Relationship="QLMayLanhModel.FK__PhieuXuat__IDYeu__48CFD27E" FromRole="YeuCauPhucVu" ToRole="PhieuXuatVatTu_KTV" />
+  </EntityType>
+  <Association Name="FK__BienBanNgh__IDYC__1FCDBCEB">
+    <End Type="QLMayLanhModel.YeuCauPhucVu" Role="YeuCauPhucVu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.BienBanNghiemThu" Role="BienBanNghiemThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YeuCauPhucVu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BienBanNghiemThu">
+        <PropertyRef Name="IDYC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTBienBan__IDBBN__2C3393D0">
+    <End Type="QLMayLanhModel.BienBanNghiemThu" Role="BienBanNghiemThu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTBienBanNghiemThu" Role="CTBienBanNghiemThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BienBanNghiemThu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTBienBanNghiemThu">
+        <PropertyRef Name="IDBBNT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KTV_BBNT__IDBBNT__24927208">
+    <End Type="QLMayLanhModel.BienBanNghiemThu" Role="BienBanNghiemThu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.KTV_BBNT" Role="KTV_BBNT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BienBanNghiemThu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KTV_BBNT">
+        <PropertyRef Name="IDBBNT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiPhiKha__IDYCP__286302EC">
+    <End Type="QLMayLanhModel.YeuCauPhucVu" Role="YeuCauPhucVu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.ChiPhiKhac" Role="ChiPhiKhac" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YeuCauPhucVu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChiPhiKhac">
+        <PropertyRef Name="IDYCPV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTBBNT_Ma__IDCTB__300424B4">
+    <End Type="QLMayLanhModel.CTBienBanNghiemThu" Role="CTBienBanNghiemThu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTBBNT_MayLanh" Role="CTBBNT_MayLanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CTBienBanNghiemThu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTBBNT_MayLanh">
+        <PropertyRef Name="IDCTBBNT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTBBNT_Ma__IDMay__30F848ED">
+    <End Type="QLMayLanhModel.MayLanh" Role="MayLanh" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTBBNT_MayLanh" Role="CTBBNT_MayLanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MayLanh">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTBBNT_MayLanh">
+        <PropertyRef Name="IDMay" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTBienBan__IDDic__2D27B809">
+    <End Type="QLMayLanhModel.DichVu_SanPham" Role="DichVu_SanPham" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTBienBanNghiemThu" Role="CTBienBanNghiemThu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DichVu_SanPham">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTBienBanNghiemThu">
+        <PropertyRef Name="IDDichVu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuNh__IDPhi__440B1D61">
+    <End Type="QLMayLanhModel.PhieuNhapVatTu" Role="PhieuNhapVatTu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuNhapVatTu" Role="CTPhieuNhapVatTu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuNhapVatTu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuNhapVatTu">
+        <PropertyRef Name="IDPhieuNhap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuNh__IDVat__44FF419A">
+    <End Type="QLMayLanhModel.VatTu" Role="VatTu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuNhapVatTu" Role="CTPhieuNhapVatTu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatTu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuNhapVatTu">
+        <PropertyRef Name="IDVatTu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuXu__IDPhi__38996AB5">
+    <End Type="QLMayLanhModel.PhieuXuatKho" Role="PhieuXuatKho" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuXuatKho" Role="CTPhieuXuatKho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuXuatKho">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuXuatKho">
+        <PropertyRef Name="IDPhieuXuat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuXu__IDVat__398D8EEE">
+    <End Type="QLMayLanhModel.KhoVatDung" Role="KhoVatDung" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuXuatKho" Role="CTPhieuXuatKho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhoVatDung">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuXuatKho">
+        <PropertyRef Name="IDVatDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuXu__IDPX___571DF1D5">
+    <End Type="QLMayLanhModel.PhieuXuatVatTu_Khach" Role="PhieuXuatVatTu_Khach" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuXuatVatTu_Khach" Role="CTPhieuXuatVatTu_Khach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuXuatVatTu_Khach">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuXuatVatTu_Khach">
+        <PropertyRef Name="IDPX_Khach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuXu__IDVat__5812160E">
+    <End Type="QLMayLanhModel.VatTu" Role="VatTu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuXuatVatTu_Khach" Role="CTPhieuXuatVatTu_Khach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatTu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuXuatVatTu_Khach">
+        <PropertyRef Name="IDVatTu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuXu__IDPX___4F7CD00D">
+    <End Type="QLMayLanhModel.PhieuXuatVatTu_KTV" Role="PhieuXuatVatTu_KTV" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuXuatVatTu_KTV" Role="CTPhieuXuatVatTu_KTV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuXuatVatTu_KTV">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuXuatVatTu_KTV">
+        <PropertyRef Name="IDPX_KTV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTPhieuXu__IDVat__5070F446">
+    <End Type="QLMayLanhModel.VatTu" Role="VatTu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.CTPhieuXuatVatTu_KTV" Role="CTPhieuXuatVatTu_KTV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatTu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPhieuXuatVatTu_KTV">
+        <PropertyRef Name="IDVatTu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MayLanh__IDKhach__145C0A3F">
+    <End Type="QLMayLanhModel.KhachHang" Role="KhachHang" Multiplicity="1" />
+    <End Type="QLMayLanhModel.MayLanh" Role="MayLanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MayLanh">
+        <PropertyRef Name="IDKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__YeuCauPhu__IDKha__1B0907CE">
+    <End Type="QLMayLanhModel.KhachHang" Role="KhachHang" Multiplicity="1" />
+    <End Type="QLMayLanhModel.YeuCauPhucVu" Role="YeuCauPhucVu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="YeuCauPhucVu">
+        <PropertyRef Name="IDKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KTV_BBNT__IDUser__239E4DCF">
+    <End Type="QLMayLanhModel.NhanVien" Role="NhanVien" Multiplicity="1" />
+    <End Type="QLMayLanhModel.KTV_BBNT" Role="KTV_BBNT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KTV_BBNT">
+        <PropertyRef Name="IDUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PhieuXuat__IDKTV__35BCFE0A">
+    <End Type="QLMayLanhModel.NhanVien" Role="NhanVien" Multiplicity="1" />
+    <End Type="QLMayLanhModel.PhieuXuatKho" Role="PhieuXuatKho" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhieuXuatKho">
+        <PropertyRef Name="IDKTV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PhieuXuat__IDKTV__47DBAE45">
+    <End Type="QLMayLanhModel.NhanVien" Role="NhanVien" Multiplicity="1" />
+    <End Type="QLMayLanhModel.PhieuXuatVatTu_KTV" Role="PhieuXuatVatTu_KTV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhieuXuatVatTu_KTV">
+        <PropertyRef Name="IDKTV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PhieuXuat__IDYeu__48CFD27E">
+    <End Type="QLMayLanhModel.YeuCauPhucVu" Role="YeuCauPhucVu" Multiplicity="1" />
+    <End Type="QLMayLanhModel.PhieuXuatVatTu_KTV" Role="PhieuXuatVatTu_KTV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YeuCauPhucVu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhieuXuatVatTu_KTV">
+        <PropertyRef Name="IDYeuCauPV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

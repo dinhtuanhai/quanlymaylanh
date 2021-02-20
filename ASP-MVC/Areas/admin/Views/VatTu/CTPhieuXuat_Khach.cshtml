@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ASP_MVC.EF.CTPhieuXuatVatTu_Khach>
+
+@{
+    ViewBag.Title = "CTPhieuXuat_Khach";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var idphieu = ViewBag.idphieu;
+    var ngayxuat = ViewBag.NgayXuat;
+    var kh = ViewBag.KH;
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Phiếu xuất @idphieu - Ngày xuất: @ngayxuat - Khách: @kh </h1>
+    <div class="idpx" hidden="hidden">@idphieu</div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div style="float:left">
+                @*@Html.ActionLink("+ Thêm vật dụng", "Create", null, new { @class = "btn btn-success " })*@
+                @*@if (statuspx == 0)
+                    {
+                        <input type="button" value="+ Thêm vật dụng" id="btnadd" class="btn btn-success btnAddVatDung" />
+                    }*@
+                @Html.ActionLink("Trở về", "PhieuXuat_Khach", "VatTu", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên vật tư</th>
+                            <th>Số lượng</th>
+                            <th>Đơn vị</th>
+                            <th>Giá bán</th>
+                            <th>Thành tiền</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr id="row_@item.IDPX_Khach" class="updateKho" data-id="@item.IDPX_Khach">
+                            <td>@item.VatTu.TenVatTu</td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.VatTu.DonVi</td>
+                            <td>@item.DonGia.Value.ToString("N0")</td>
+                            <td>@((item.SoLuong * item.DonGia).Value.ToString("N0"))</td>
+                            <td></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

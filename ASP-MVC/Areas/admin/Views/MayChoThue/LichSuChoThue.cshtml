@@ -1,0 +1,151 @@
+﻿@model PagedList.IPagedList<ASP_MVC.Areas.admin.Models.LichSuMay>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "LichSuChoThue";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var idmay = ViewBag.IDmay;
+    var bd = ViewBag.Ngaybd;
+    var kt = ViewBag.Ngaykt;
+}
+
+@section JsFooter{
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Assets/Admin/js/plugin/mustache.min.js"></script>
+    <script src="~/Assets/Admin/js/controllers/MayChoThueController.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ngaybd,#ngaykt').datepicker({
+                format: "dd/mm/yyyy",
+                todayBtn: "linked",
+                clearBtn: true,
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            //$("#dtpFromDate").datepicker("update", $('#txtFromDate').val());
+            // $("#dtpToDate").datepicker("update", $('#txtToDate').val());
+        });
+    </script>
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Lịch sử cho thuê của máy công ty </h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            @Html.ActionLink("Trở về", "Index", "MayChoThue", null, new { @class = "btn btn-primary", @style = "float:left" })
+            @using (Html.BeginForm("LichSuChoThue", "MayChoThue", FormMethod.Get))
+            {
+                <p style="float:right;width:450px;display:flex">
+                    <input style="margin-right:10px" class="form-control col-md-5" name="idmay" type="text" value="@idmay" hidden />
+                    @if (bd != null)
+                    {
+                        <input style="margin-right:10px" class="form-control col-md-5" name="ngaybd" type="text" placeholder="Từ ngày..." value="@bd" />
+                    }
+                    else
+                    {
+                        <input style="margin-right:10px" class="form-control col-md-5" name="ngaybd" type="text" placeholder="Từ ngày..." value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                    }
+                    @if (kt != null)
+                    {
+                        <input style="margin-right:10px" class="form-control col-md-5" name="ngaykt" type="text" placeholder="Đến ngày..." value="@kt" />
+                    }
+                    else
+                    {
+                        <input style="margin-right:10px" class="form-control col-md-5" name="ngaykt" type="text" placeholder="Đến ngày..." value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                    }
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                </p>
+            }
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" style="display: block; overflow-x: auto; white-space: nowrap;" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Số BBNT</th>
+                            <th>Tên máy</th>
+                            <th>Model - Nhãn hiệu</th>
+                            <th>Công suất</th>
+                            <th>Khách thuê</th>
+                            <th>Tên dịch vụ</th>
+                            <th>Ngày thuê</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tableLichSu">
+                        @foreach (var item in Model)
+                        {
+                            <tr class="updateMPV" data-id="@item.Idbbnt" id="row_@item.Idbbnt">
+                                <td>@item.Idbbnt</td>
+                                <td width="200px">@item.Tenmay</td>
+                                <td>@item.Model</td>
+                                <td>@item.Congsuat</td>
+                                <td>@item.Tenkhach</td>
+                                <td width="200px">@item.Tendichvu</td>
+                                <td id="NgaySuaChua">@item.Ngaythuchien.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <button type="button" data-toggle="modal" data-target=".dsKTV" title="KTV phụ trách" data-idbbnt="@item.Idbbnt" class="btn btn-primary btnXemKTV" style="color:white"><i class="fas fa-users"></i></button>
+                                    @*@Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ID, idkh = item.IDKhachHang }, new { @class = "btn btn-info", @style = "color:white" })*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div style="float:right">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.search }))
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<div class="modal fade dsKTV ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="modal-header">
+                    <h4 class="h4 mb-2 text-gray-800">Các KTV phụ trách </h4>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tên KTV</th>
+                                        <th>Điểm</th>
+                                        <th>Đánh giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="abc" id="table_body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr id="rowktv_{{ID}}">
+        <td>{{TenKTV}}</td>
+        <td>{{Diem}}</td>
+        <td>{{DanhGia}}</td>
+    </tr>
+</script>

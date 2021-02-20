@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ASP_MVC.EF.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Phiếu xuất kho</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">@Html.ActionLink("+ Thêm mới", "Create")</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Người lập phiếu</th>
+                            <th>KTV phụ trách</th>
+                            <th>Ngày lập</th>
+                            <th>Tùy chỉnh</th>
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+                            <tr>
+                                <th>Tên máy</th>
+                                <th>Nhãn hiệu</th>
+                                <th>Công suất</th>
+                                <th>Số lần sửa chữa</th>
+                                <th>Số lần cho thuê</th>
+                                <th>Doanh số</th>
+                                <th>Tình trạng</th>
+                                <th>Tùy chỉnh</th>
+                            </tr>
+                        </tfoot>*@
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.TenSP</td>
+                                <td>@item.Model</td>
+                                <td>@item.Gia vnd</td>
+                                <td>
+                                    <a class="btn btn-success" style="color:white" data-toggle="modal" data-target=".abc"><span class="glyphicon glyphicon-eye-open"></span>Xem chi tiết</a>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdSP }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.IdSP })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<div class="modal fade abc " style="width:1100px">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:800px">
+
+            <div class="container-fluid">
+                <div class="modal-header">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Thông tin chi tiết</h1>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="modal-body">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                @Html.ActionLink("+ Thêm mới", "Create") |
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="display: block; overflow-x: auto; white-space: nowrap;" id="dataTable" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên dụng cụ</th>
+                                            <th>Loại</th>
+                                            <th>Số lượng</th>
+                                            <th>Ghi chú</th>
+                                            <th>Tùy chỉnh</th>
+                                        </tr>
+                                    </thead>
+                                    @*<tfoot>
+                                            <tr>
+                                                <th>Tài khoản</th>
+                                                <th>Họ tên</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Tùy chỉnh</th>
+                                            </tr>
+                                        </tfoot>*@
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>@item.Gia</td>
+                                            <td>@item.SoLuong</td>
+                                            <td>@item.Gia</td>
+                                            <td>@item.SoLuong</td>
+                                            <td>@item.Gia</td>
+                                            @*<td>@item.SDT</td>
+        <td>@item.Username</td>
+        <td>@item.HoTen</td>
+        <td>@item.SDT</td>
+        <td>@item.SDT</td>*@
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.IdSP })
+
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

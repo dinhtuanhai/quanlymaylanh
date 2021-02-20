@@ -1,0 +1,254 @@
+﻿@model PagedList.IPagedList<ASP_MVC.EF.NhanVien>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+@section JsFooter{
+    <script src="~/Assets/Admin/js/plugin/mustache.min.js"></script>
+    <script src="~/Assets/Admin/js/controllers/UserController.js"></script>
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Kỹ thuật viên</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div style="float:left">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    @Html.ActionLink("+ Thêm mới", "Create", null, new { @class = "btn btn-success " })
+                </h6>
+            </div>
+            @using (Html.BeginForm("Index", "User", FormMethod.Get))
+            {
+                <p style="float:right;width:300px">
+                    <input class="form-control col-md-9" style="float:left" name="searchString" placeholder="Tên/SĐT KTV" />
+                    <button style="margin-left:10px" class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                </p>
+            }
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Tên kỹ thuật viên</th>
+                            <th>Số điện thoại</th>
+                            <th>Loại</th>
+                            <th>Tình trạng</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{
+                            var i = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr class="updateUser" data-id="@item.ID" id="row_@item.ID">
+                                <td id="id">@item.ID</td>
+                                <td width="15%">@item.Username</td>
+                                <td width="20%" id="@item.ID"><input type="text" id="tenktv_@item.ID" class="form-control" value="@item.TenKTV" disabled /></td>
+                                @*<td>@item.SDT</td>*@
+                                <td width="15%"><input type="text" id="sdt_@item.ID" class="form-control" value="@item.SDT" disabled /></td>
+                                <td>
+                                    <select class="form-control" id="loai_@item.ID" disabled>
+                                        @if (item.Loai == 0)
+                                        {
+                                            <option value="0" selected>Admin</option>
+                                            <option value="1">QL kho</option>
+                                            <option value="2">QL nhập liệu</option>
+                                            <option value="3">KTV</option>
+                                        }
+                                        else if (item.Loai == 1)
+                                        {
+                                            <option value="0">Admin</option>
+                                            <option value="1" selected>QL kho</option>
+                                            <option value="2">QL nhập liệu</option>
+                                            <option value="3">KTV</option>
+                                        }
+                                        else if (item.Loai == 2)
+                                        {
+                                            <option value="0">Admin</option>
+                                            <option value="1">QL kho</option>
+                                            <option value="2" selected>QL nhập liệu</option>
+                                            <option value="3">KTV</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="0">Admin</option>
+                                            <option value="1">QL kho</option>
+                                            <option value="2">QL nhập liệu</option>
+                                            <option value="3" selected>KTV</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" id="status_@item.ID" disabled>
+                                        @if (item.Status == 1)
+                                        {
+                                            <option value="1" selected>Hoạt động</option>
+                                            <option value="0">Khóa</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="1">Hoạt động</option>
+                                            <option value="0" selected>Khóa</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="button" data-toggle="modal" data-target=".DiemKTV" data-idnv="@item.ID" class="btn btn-success XemDiem" title="Xem điểm" style="color:white"><i class="fas fa-eye"></i></button>
+                                    <button type="button" data-toggle="modal" data-target=".dsDungCu" data-idnv="@item.ID" class="btn btn-primary dsDC" title="Dụng cụ đang mượn" style="color:white"><i class="fas fa-tools"></i></button>
+                                    @*@Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-info", @style = "color:white" })*@
+                                    <button type="button" data-idnv="@item.ID" title="Chỉnh sửa" class="btn btn-info btnEditNV" style="color:white"><i id="icon_@item.ID" class="fas fa-pencil-alt"></i></button>
+                                    <a class="btn btn-danger Reset" data-toggle="modal" data-target=".Option" data-id="@item.ID" title="Reset" href="#">R</a>
+                                </td>
+                                @*<td><a data-toggle="modal" data-target=".abc" data-id="@item.ID" class="Opendialog btn"><i class="fas fa-times"></i></a></td>*@
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div style="float:right">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.search }))</div>
+        </div>
+    </div>
+    @Html.Raw(TempData["msg"])
+</div>
+
+<div class="modal fade Option">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="container-fluid">
+                <div class="modal-header">
+                    <!-- Page Heading -->
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="modal-body">
+                    <button type="button" class="btn btn-success rsPass" data-dismiss="modal" style="color:white">Reset Password</button>
+                    <button type="button" class="btn btn-danger rsAll" data-dismiss="modal" style="color:white;width:150px" title="Gồm mật khẩu và điểm KTV">Reset All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade DiemKTV">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="container-fluid">
+                <div class="modal-header">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Bảng điểm </h1>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+
+                            <thead>
+                                <tr>
+                                    <th>Tháng</th>
+                                    <th>Tổng điểm</th>
+                                </tr>
+                            </thead>
+                            <tbody class="abc" id="table_body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr id="rowktv_{{ID}}">
+        <td>{{Thang}}</td>
+        <td>{{Diem}}</td>
+    </tr>
+</script>
+
+<div class="modal fade dsDungCu ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="modal-header">
+                    <h4 class="h4 mb-2 text-gray-800">Các dụng cụ đang mượn</h4>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tên dụng cụ</th>
+                                        <th>Ngày mượn</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="abc" id="table_bodydc"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="data-templatedc" type="x-tmpl-mustache">
+    <tr>
+        <td>{{TenVatDung}}</td>
+        <td>
+            {{NgayXuat}}
+        </td>
+        <td>{{GhiChu}}</td>
+    </tr>
+</script>
+
+<!-- /.container-fluid -->
+<div class="modal fade abc ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="container-fluid">
+                <div class="modal-header">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Xác nhận xóa KTV?</h1>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="modal-body">
+                    <button style="width:70px;" data-dismiss="modal" class="btn btn-primary xacnhan"><span>Có</span></button>
+                    <button style="margin-left: 250px; width:70px;" data-dismiss="modal" class="btn btn-primary huy"><span>Không</span></button>
+                    @*@Ajax.ActionLink("X", "Delete", new { id =  }, new AjaxOptions
+                        {
+                            Confirm = "Bản muốn xóa yêu cầu này?",
+                            OnComplete = "$('#row_" + @item.ID + "').remove()",
+                            HttpMethod = "Delete"
+                        },)*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

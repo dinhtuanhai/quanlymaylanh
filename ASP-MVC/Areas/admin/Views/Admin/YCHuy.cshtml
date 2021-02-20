@@ -1,0 +1,162 @@
+﻿@model PagedList.IPagedList<ASP_MVC.EF.YeuCauPhucVu>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var ycct = (PagedList.IPagedList<ASP_MVC.EF.YeuCauPhucVu>)ViewBag.YCCT;
+}
+@section JsFooter{
+    @*<script src="~/Assets/Admin/js/plugin/jquery.twbsPagination.min.js"></script>*@
+    <script src="~/Assets/Admin/js/controllers/YeuCauPhucVuController.js"></script>
+}
+<div style="margin-left:30px">
+    @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-success " })
+
+
+</div>
+<hr />
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 h3 mb-2 text-gray-800">
+            <p style="float:left">Yêu cầu bảo trì/sửa chữa</p>
+            @using (Html.BeginForm("YCHuy", "Admin", FormMethod.Get))
+            {
+                <p style="float:right;width:300px">
+                    <input class="form-control col-md-9" style="float:left" name="searchStringPV" placeholder="Tên/SDT khách hàng" />
+                    <button style="margin-left:10px" class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                </p>
+            }
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered table-sm" style="display: block; overflow-x: auto; white-space: nowrap;" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Ngày hủy</th>
+                            <th>Lý do</th>
+                            <th>Yêu cầu</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ phục vụ</th>
+                            <th>Ngày lập</th>
+                            <th>Ngày bắt đầu</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+                            <tr>
+                                <th>Tài khoản</th>
+                                <th>Họ tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Tùy chỉnh</th>
+                            </tr>
+                        </tfoot>*@
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr id="row_@item.ID">
+                            <td>
+                                <a style="color:white" class="btn btn-dark">Hủy</a>
+
+                            </td>
+                            <td>@(item.NgayHoanThanh.HasValue ? item.NgayHoanThanh.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td>@item.LiDo</td>
+                            <td>@item.YeuCau</td>
+                            <td>@item.KhachHang.HoTen</td>
+                            <td>@item.KhachHang.SDT</td>
+                            <td>@item.DiaChiPhucVu</td>
+                            <td>@(item.NgayLap.HasValue ? item.NgayLap.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td>@(item.NgayBatDau.HasValue ? item.NgayBatDau.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td>
+                                <button class="btn bbnt btn-primary " data-id="@item.ID" data-idkh="@item.IDKhachHang">
+                                    <i class="fas fa-clone"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 h3 mb-2 text-gray-800">
+            <p style="float:left">Yêu cầu thuê máy lạnh</p>
+            @using (Html.BeginForm("YCHuy", "Admin", FormMethod.Get))
+            {
+                <p style="float:right;width:300px">
+                    <input class="form-control col-md-9" style="float:left" name="searchStringCT" placeholder="Tên/SDT khách hàng" />
+                    <button style="margin-left:10px" class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                </p>
+            }
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" style="display: block; overflow-x: auto; white-space: nowrap;" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Ngày hủy</th>
+                            <th>Lý do</th>
+                            <th>Yêu cầu</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ phục vụ</th>
+                            <th>Ngày lập</th>
+                            <th>Ngày bắt đầu</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+                            <tr>
+                                <th>Tài khoản</th>
+                                <th>Họ tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Tùy chỉnh</th>
+                            </tr>
+                        </tfoot>*@
+                    <tbody>
+                        @foreach (var item in ycct)
+                        {
+                        <tr id="row_@item.ID">
+                            <td>
+                                <a style="color:white" class="btn btn-dark">Hủy</a>
+
+                            </td>
+                            <td>@(item.NgayHoanThanh.HasValue ? item.NgayHoanThanh.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td>@item.LiDo</td>
+                            <td>@item.YeuCau</td>
+                            <td>@item.KhachHang.HoTen</td>
+                            <td>@item.KhachHang.SDT</td>
+                            <td>@item.DiaChiPhucVu</td>
+                            <td>@(item.NgayLap.HasValue ? item.NgayLap.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td>@(item.NgayBatDau.HasValue ? item.NgayBatDau.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td>
+                                <button class="btn bbnt btn-primary " data-id="@item.ID" data-idkh="@item.IDKhachHang">
+                                    <i class="fas fa-clone"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+
+</div>

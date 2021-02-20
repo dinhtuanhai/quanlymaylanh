@@ -1,0 +1,110 @@
+﻿@model PagedList.IPagedList<ASP_MVC.EF.VatTu>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+@section JsFooter{
+    <script src="~/Assets/Admin/js/controllers/VatTuController.js"></script>
+}
+<!-- Begin Page Content -->
+<div>
+    @using (Html.BeginForm("Import", "VatTu", FormMethod.Post, new { style = "float:right;margin-right:25px", enctype = "multipart/form-data" }))
+    {
+        @Html.Raw(ViewBag.Error)
+        <input type="submit" value="Import" class="btn btn-primary" style="float:right" />
+        <input type="file" name="UploadedFile" />
+    }
+</div>
+<hr />
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Kho vật tư</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div style="float:left">
+                @Html.ActionLink("+ Thêm mới", "Create", null, new { @class = "btn btn-success " })
+                @Html.ActionLink("Nhập vật tư", "PhieuNhap", null, new { @class = "btn btn-primary " })
+                @Html.ActionLink("Xuất vật tư (KTV)", "PhieuXuat_KTV", null, new { @class = "btn btn-dark " })
+                @Html.ActionLink("Xuất vật tư (Khách lẻ)", "PhieuXuat_Khach", null, new { @class = "btn btn-dark " })
+            </div>
+            @using (Html.BeginForm("Index", "VatTu", FormMethod.Get))
+            {
+                <p style="float:right;width:300px">
+                    <input class="form-control col-md-9" style="float:left" name="searchString" placeholder="Tên vật tư" />
+                    <button style="margin-left:10px" class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                </p>
+            }
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên vật tư</th>
+                            <th>Số lượng</th>
+                            <th>Đơn vị</th>
+                            <th>Giá bán</th>
+                            @*<th>Ghi chú</th>*@
+                            @*<th>Tình trạng</th>*@
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr id="row_@item.ID" class="updateVatTu" data-id="@item.ID">
+                            <td width="30%">@item.TenVatTu</td>
+                            <td>@item.SoLuong</td>
+                            <td><input type="text" id="valdonvi_@item.ID" class="form-control" value="@item.DonVi" hidden /><p id="donvi_@item.ID">@item.DonVi</p></td>
+                            <td><input type="number" id="valgiaban_@item.ID" class="form-control" value="@(item.GiaBan.HasValue? item.GiaBan.Value : 0)" hidden /><p id="giaban_@item.ID">@(item.GiaBan.HasValue? item.GiaBan.Value.ToString("N0"):"0")</p></td>
+                            @*<td><input type="text" size="25" id="ghichu_@item.ID" class="form-control" value="@item.GhiChu" disabled /></td>*@
+                            <td>
+                                <button title="Chỉnh sửa" type="button" data-id="@item.ID" class="btn btn-info btnEditVatTu" style="color:white"><i id="icon_@item.ID" class="fas fa-pencil-alt"></i></button>
+                            </td>
+                            <td><a data-toggle="modal" data-target=".abc" data-id="@item.ID" class="Opendialog btn"><i class="fas fa-times"></i></a></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div style="float:right">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.search }))</div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<div class="modal fade abc ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="container-fluid">
+                <div class="modal-header">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Xác nhận xóa vật tư?</h1>
+                    <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                </div>
+                <!-- DataTales Example -->
+                <div class="modal-body">
+                    <button style="width:70px;" data-dismiss="modal" class="btn btn-primary xacnhan"><span>Có</span></button>
+                    <button style="margin-left: 250px; width:70px;" data-dismiss="modal" class="btn btn-primary huy"><span>Không</span></button>
+                    @*@Ajax.ActionLink("X", "Delete", new { id =  }, new AjaxOptions
+                        {
+                            Confirm = "Bản muốn xóa yêu cầu này?",
+                            OnComplete = "$('#row_" + @item.ID + "').remove()",
+                            HttpMethod = "Delete"
+                        },)*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
